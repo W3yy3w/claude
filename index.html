@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lion's Den Reptile Farm</title>
+<meta name="description" content="Malaysia's most dangerous reptile farm. King cobras, pythons, monitor lizards and crocodiles, deep in the Pahang jungle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Big+Shoulders+Display:wght@800;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: full-bleed photo hero under hazard tape, then a staggered animal grid, then a three-card ticket row. */
+  :root {
+    --ink: #0a0808;
+    --coal: #151111;
+    --bone: #efe8e0;
+    --ash: #a39a92;
+    --blood: #c4161c;
+    --hazard: #f2b705;
+    --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --body: "Barlow", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; color-scheme: dark; }
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font: 400 1.0625rem/1.6 var(--body);
+    padding-inline: 0;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--hazard); outline-offset: 3px; }
+  .wrap { width: min(1180px, 100% - 2rem); margin-inline: auto; }
+
+  .tape {
+    height: 18px;
+    background: repeating-linear-gradient(-45deg, var(--hazard) 0 18px, var(--ink) 18px 36px);
+  }
+
+  /* Nav */
+  .nav { position: absolute; inset: 18px 0 auto; z-index: 3; }
+  .nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.1rem; }
+  .logo { font: 900 1.6rem/1 var(--display); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+  .logo b { color: var(--blood); font-weight: 900; }
+  .nav a.btn-sm {
+    font: 800 1rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    background: var(--blood); padding: .7rem 1.1rem;
+  }
+  .nav a.btn-sm:hover { background: var(--bone); color: var(--ink); }
+
+  /* Hero */
+  .hero { position: relative; isolation: isolate; min-height: 40rem; display: flex; align-items: flex-end; background: var(--coal); overflow: hidden; }
+  .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; z-index: -2; filter: contrast(1.15) saturate(.85); }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(10,8,8,.55) 0%, rgba(10,8,8,.15) 35%, rgba(10,8,8,.92) 100%),
+                radial-gradient(ellipse at 20% 100%, rgba(196,22,28,.35), transparent 60%); }
+  .hero-copy { padding-block: 9rem 3.5rem; }
+  .eyebrow { font: 500 .85rem/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--hazard); }
+  h1 { font: 900 clamp(3.6rem, 13vw, 10rem)/.86 var(--display); text-transform: uppercase; letter-spacing: -.01em; margin-block: .6rem 1.4rem; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--blood); display: block; }
+  .lede { max-width: 38rem; font-size: 1.2rem; color: var(--bone); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; align-items: center; }
+  .btn { display: inline-block; font: 800 1.25rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    background: var(--blood); color: var(--bone); padding: 1.1rem 1.8rem; border: 2px solid var(--blood); transition: background .15s, color .15s; }
+  .btn:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+  .btn.ghost { background: transparent; border-color: var(--bone); }
+  .btn.ghost:hover { background: var(--bone); color: var(--ink); }
+
+  .warn { background: var(--hazard); color: var(--ink); }
+  .warn .wrap { display: flex; flex-wrap: wrap; gap: .4rem 2.5rem; justify-content: space-between; padding-block: .8rem; font: 800 1.05rem/1.2 var(--display); letter-spacing: .14em; text-transform: uppercase; }
+
+  /* Animals */
+  section { padding-block: 5.5rem; }
+  h2 { font: 900 clamp(2.6rem, 7vw, 5rem)/.92 var(--display); text-transform: uppercase; text-wrap: balance; }
+  h2 span { color: var(--blood); }
+  .sec-head { display: grid; gap: 1rem; margin-bottom: 3rem; max-width: 46rem; }
+  .sec-head p { color: var(--ash); }
+
+  .animals { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+  .card { position: relative; background: var(--coal); min-height: 24rem; overflow: hidden; display: flex; align-items: flex-end; grid-column: span 6; isolation: isolate; }
+  .card:nth-child(1) { grid-column: span 7; }
+  .card:nth-child(2) { grid-column: span 5; }
+  .card:nth-child(3) { grid-column: span 5; }
+  .card:nth-child(4) { grid-column: span 7; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: contrast(1.1) saturate(.8); transition: transform .6s ease, filter .6s ease; }
+  .card:hover img { transform: scale(1.05); filter: contrast(1.15) saturate(1); }
+  .card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 30%, rgba(10,8,8,.95) 100%); }
+  .card .body { padding: 1.6rem; display: grid; gap: .5rem; width: 100%; }
+  .card .latin { font: 500 .8rem/1.3 var(--mono); letter-spacing: .08em; color: var(--ash); font-style: italic; }
+  .card h3 { font: 900 2.4rem/1 var(--display); text-transform: uppercase; }
+  .card p { max-width: 32rem; }
+  .meter { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; margin-top: .4rem; font: 500 .78rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+  .threat { color: var(--ink); background: var(--blood); padding: .35rem .55rem; color: var(--bone); }
+  .threat.extreme { background: var(--hazard); color: var(--ink); }
+
+  /* Tickets */
+  #tickets { background: var(--coal); border-block: 1px solid #2a2222; }
+  .tickets { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
+  .ticket { background: var(--ink); border: 1px solid #332a2a; padding: 2rem 1.6rem; display: grid; gap: 1rem; align-content: start; position: relative; }
+  .ticket.feat { border: 2px solid var(--blood); }
+  .ticket.feat::before { content: "Most brave"; position: absolute; top: -.85rem; left: 1.4rem; background: var(--blood); font: 800 .9rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; padding: .4rem .7rem; }
+  .ticket h3 { font: 900 1.9rem/1 var(--display); text-transform: uppercase; }
+  .price { font: 900 4rem/1 var(--display); font-variant-numeric: tabular-nums; }
+  .price small { font-size: 1.4rem; color: var(--ash); margin-right: .3rem; }
+  .price sub { font: 500 .8rem/1 var(--mono); color: var(--ash); letter-spacing: .08em; vertical-align: baseline; margin-left: .4rem; text-transform: uppercase; }
+  .ticket ul { list-style: none; padding: 0; display: grid; gap: .5rem; color: var(--ash); }
+  .ticket li::before { content: "\2715"; color: var(--blood); margin-right: .6rem; font-size: .8rem; }
+  .ticket .btn { text-align: center; margin-top: .6rem; }
+  .fine { margin-top: 2rem; color: var(--ash); font-size: .95rem; max-width: 46rem; }
+
+  footer { padding-block: 3.5rem 4rem; }
+  footer .wrap { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  footer h4 { font: 500 .8rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--hazard); margin-bottom: .7rem; }
+  footer p { color: var(--ash); }
+  .legal { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #2a2222; font: 500 .75rem/1.5 var(--mono); color: var(--ash); letter-spacing: .06em; }
+
+  @media (max-width: 760px) {
+    .card, .card:nth-child(n) { grid-column: 1 / -1; min-height: 21rem; }
+    .hero-copy { padding-top: 7rem; }
+    section { padding-block: 4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .card img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tape" aria-hidden="true"></div>
+
+<header class="hero">
+  <img src="https://unsplash.com/photos/BIpHATwaYzg/download?force=true&w=2000" alt="A king cobra rearing up with its hood spread" onerror="this.remove()">
+  <nav class="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="logo" href="#top">Lion's <b>Den</b></a>
+      <a class="btn-sm" href="#tickets">Get tickets</a>
+    </div>
+  </nav>
+  <div class="wrap hero-copy" id="top">
+    <p class="eyebrow">Reptile farm &middot; Pahang, Malaysia</p>
+    <h1>Enter the <em>Den.</em></h1>
+    <p class="lede">Deep in the Pahang jungle, more than 300 venomous snakes, giant pythons, monitor lizards and crocodiles live a few metres from where you stand. The keepers know every one by name. You will not.</p>
+    <div class="cta-row">
+      <a class="btn" href="#tickets">Buy tickets</a>
+      <a class="btn ghost" href="#animals">Meet the residents</a>
+    </div>
+  </div>
+</header>
+
+<div class="warn" role="note">
+  <div class="wrap">
+    <span>Danger: venomous animals</span>
+    <span>Closed shoes required</span>
+    <span>Keep behind the line</span>
+  </div>
+</div>
+
+<section id="animals">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The residents</p>
+      <h2>Four ways this <span>ends badly</span> for you</h2>
+      <p>Each animal has its own enclosure, its own handler and its own rules. Learn them before you go in.</p>
+    </div>
+
+    <div class="animals">
+      <article class="card">
+        <img loading="lazy" src="https://unsplash.com/photos/BIpHATwaYzg/download?force=true&w=1400" alt="King cobra with hood flared" onerror="this.remove()">
+        <div class="body">
+          <span class="latin">Ophiophagus hannah</span>
+          <h3>King Cobra</h3>
+          <p>The longest venomous snake on Earth. Up to 5 metres, and it eats other snakes. One bite carries enough neurotoxin to stop an elephant's breathing.</p>
+          <div class="meter"><span class="threat extreme">Threat: extreme</span><span>Length: up to 5.5 m</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img loading="lazy" src="https://unsplash.com/photos/HSIxiJwpgtM/download?force=true&w=1200" alt="A green tree python coiled on a branch" onerror="this.remove()">
+        <div class="body">
+          <span class="latin">Python reticulatus</span>
+          <h3>Reticulated Python</h3>
+          <p>No venom needed. It strikes, wraps and squeezes. Malaysia's giants regularly pass 6 metres.</p>
+          <div class="meter"><span class="threat">Threat: high</span><span>Length: up to 7 m</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img loading="lazy" src="https://unsplash.com/photos/hqeqfnv4lFQ/download?force=true&w=1200" alt="A large monitor lizard resting on a branch" onerror="this.remove()">
+        <div class="body">
+          <span class="latin">Varanus salvator</span>
+          <h3>Water Monitor</h3>
+          <p>Two metres of muscle, claws and bacteria-loaded teeth. Fast on land, faster in water, and it bites back.</p>
+          <div class="meter"><span class="threat">Threat: high</span><span>Length: up to 2.5 m</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img loading="lazy" src="https://unsplash.com/photos/0olfk67xykM/download?force=true&w=1400" alt="Close-up of a crocodile's head and teeth" onerror="this.remove()">
+        <div class="body">
+          <span class="latin">Crocodylus porosus</span>
+          <h3>Saltwater Crocodile</h3>
+          <p>The apex predator of Malaysian rivers and the largest living reptile. Feeding time is the show nobody films twice, because they drop the phone.</p>
+          <div class="meter"><span class="threat extreme">Threat: extreme</span><span>Length: up to 6 m</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="tickets">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Admission</p>
+      <h2>Pick your <span>level of risk</span></h2>
+      <p>Every ticket includes a guided walk, a safety briefing and a signed waiver. Prices in Malaysian ringgit.</p>
+    </div>
+
+    <div class="tickets">
+      <div class="ticket">
+        <h3>Bystander</h3>
+        <div class="price"><small>RM</small>35<sub>/ adult</sub></div>
+        <ul>
+          <li>Guided walk of all enclosures</li>
+          <li>Crocodile feeding show</li>
+          <li>Children 4&ndash;12: RM20</li>
+          <li>MyKad holders: RM25</li>
+        </ul>
+        <a class="btn ghost" href="#tickets">Buy ticket</a>
+      </div>
+
+      <div class="ticket feat">
+        <h3>Venom Hour</h3>
+        <div class="price"><small>RM</small>75<sub>/ person</sub></div>
+        <ul>
+          <li>Everything in Bystander</li>
+          <li>Live king cobra venom extraction</li>
+          <li>Front-row spot behind the glass</li>
+          <li>Python handling photo</li>
+        </ul>
+        <a class="btn" href="#tickets">Buy ticket</a>
+      </div>
+
+      <div class="ticket">
+        <h3>Keeper for a Day</h3>
+        <div class="price"><small>RM</small>220<sub>/ person</sub></div>
+        <ul>
+          <li>Shadow a head keeper, 4 hours</li>
+          <li>Feed a monitor lizard by hand</li>
+          <li>Ages 16+, small groups only</li>
+          <li>Boots and gloves provided</li>
+        </ul>
+        <a class="btn ghost" href="#tickets">Buy ticket</a>
+      </div>
+    </div>
+    <p class="fine">Open daily, 9am to 5pm. Last entry 4pm. Heavy rain closes the outdoor enclosures. Sample prices shown for design purposes.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top">Lion's <b>Den</b></a>
+      <p>Reptile farm, deep in the Pahang jungle, Malaysia.</p>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Daily, 9am &ndash; 5pm<br>Last entry 4pm</p>
+    </div>
+    <div>
+      <h4>Rules of the Den</h4>
+      <p>Stay behind the line. Never tap the glass. Do what the keeper says, the first time.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="legal">Photos via Unsplash. Lion's Den is a fictional venue. Species facts are approximate.</p>
+  </div>
+</footer>
+
+<div class="tape" aria-hidden="true"></div>
+</body>
+</html>
