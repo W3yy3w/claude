@@ -56,7 +56,7 @@
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
     background: linear-gradient(180deg, rgba(10,8,8,.55) 0%, rgba(10,8,8,.15) 35%, rgba(10,8,8,.92) 100%),
                 radial-gradient(ellipse at 20% 100%, rgba(196,22,28,.35), transparent 60%); }
-  .hero .wrap { padding-block: 9rem 3.5rem; }
+  .hero-copy { padding-block: 9rem 3.5rem; }
   .eyebrow { font: 500 .85rem/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--hazard); }
   h1 { font: 900 clamp(3.6rem, 13vw, 10rem)/.86 var(--display); text-transform: uppercase; letter-spacing: -.01em; margin-block: .6rem 1.4rem; text-wrap: balance; }
   h1 em { font-style: normal; color: var(--blood); display: block; }
@@ -118,7 +118,7 @@
 
   @media (max-width: 760px) {
     .card, .card:nth-child(n) { grid-column: 1 / -1; min-height: 21rem; }
-    .hero .wrap { padding-top: 7rem; }
+    .hero-copy { padding-top: 7rem; }
     section { padding-block: 4rem; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -139,7 +139,7 @@
       <a class="btn-sm" href="#tickets">Get tickets</a>
     </div>
   </nav>
-  <div class="wrap" id="top">
+  <div class="wrap hero-copy" id="top">
     <p class="eyebrow">Reptile farm &middot; Pahang, Malaysia</p>
     <h1>Enter the <em>Den.</em></h1>
     <p class="lede">Deep in the Pahang jungle, more than 300 venomous snakes, giant pythons, monitor lizards and crocodiles live a few metres from where you stand. The keepers know every one by name. You will not.</p>
